@@ -33,5 +33,6 @@ RENAME TABLE customers TO users;
 
 
 
+
 -- 8. Delete the database (use with caution)
 DROP DATABASE startersql;

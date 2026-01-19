@@ -12,5 +12,6 @@ ALTER TABLE users MODIFY COLUMN name VARCHAR(100) FIRST;
 -- modify column type
 ALTER TABLE users MODIFY COLUMN name VARCHAR(150);
 
+
 -- view table data
 SELECT * FROM users;
