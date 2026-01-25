@@ -94,56 +94,117 @@ INSERT INTO PROGRAMMER VALUES
 
 -- Display PROGRAMMER table
 SELECT * FROM PROGRAMMER;
-
 -- 1. Find out the selling average cost for packages developed in PASCAL.
+SELECT AVG(SCOST) AS selling_average_cost 
+FROM SOFTWARE WHERE DEV_IN = 'PASCAL';
 
--- 2. Display the names and ages of all programmers.
+
+-- 2. Display the names and ages of all programmers
+SELECT PNAME,
+       TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS AGE
+FROM PROGRAMMER;
+
 
 -- 3. Display the names of those who have done the DAP course.
+SELECT PNAME FROM STUDIES WHERE COURSE = 'DAP';
 
--- 4. Display the names and dates of birth of all programmers born in January.
+
+-- 4. Display the names and dates of birth of all programmers born in January
+SELECT PNAME, DOB FROM PROGRAMMER WHERE MONTH(DOB) = 1;
+
 
 -- 5. What is the highest number of copies sold by a package.
+SELECT MAX(SOLD) FROM SOFTWARE;
+
 
 -- 6. Display the lowest course fee.
+SELECT MIN(COURSEFEE) FROM STUDIES;
+
 
 -- 7. How many programmers have done the PGDCA course.
+SELECT COUNT(*) FROM STUDIES WHERE COURSE = 'PGDCA';
 
--- 8. How much revenue has been earned through sales of packages developed in C.
+
+-- 8. How much revenue has been earned through sales of packages developed in C
+SELECT SUM(SCOST * SOLD) AS TOTAL_REVENUE
+FROM SOFTWARE
+WHERE DEV_IN = 'C';
+
 
 -- 9. Display the details of the software developed by Ramesh.
+SELECT * FROM SOFTWARE WHERE PNAME = 'RAMESH';
+
 
 -- 10. How many programmers studied at Sabhari.
+SELECT COUNT(*) FROM STUDIES WHERE INSTITUTE = 'SABHARI';
 
--- 11. Display details of packages whose sales crossed the 2000 mark.
+
+-- 11. Display details of packages whose sales crossed the 2000 mark
+SELECT * FROM SOFTWARE WHERE SCOST * SOLD > 2000;
+
+
 
 -- 12. Find out the number of copies which should be sold in order to recover development cost.
+SELECT TITLE, CEIL(DCOST / SCOST) AS copies_required FROM SOFTWARE;
+
 
 -- 13. Display the details of packages for which development cost has been recovered.
+SELECT * FROM SOFTWARE WHERE SOLD * SCOST >= DCOST; 
+
 
 -- 14. What is the cost of the costliest software developed in BASIC.
+SELECT MAX(DCOST) AS max_development_cost FROM SOFTWARE 
+WHERE DEV_IN = 'BASIC'; 
+
 
 -- 15. How many packages were developed in DBASE.
+SELECT COUNT(*) FROM SOFTWARE WHERE DEV_IN = 'DBASE';
+
 
 -- 16. How many programmers studied in Pragathi.
+SELECT COUNT(*) FROM STUDIES WHERE INSTITUTE = 'PRAGATHI';
+
 
 -- 17. How many programmers paid between 5000 and 10000 for their studies.
+SELECT COUNT(*) FROM STUDIES WHERE COURSEFEE BETWEEN 5000 AND 10000;
+
 
 -- 18. What is the average course fee.
+SELECT AVG(COURSEFEE) FROM STUDIES;
+
 
 -- 19. Display the details of programmers knowing C.
+SELECT * FROM PROGRAMMER WHERE PROF1 = 'C' OR PROF2 = 'C'; 
 
 -- 20. How many programmers know either COBOL or PASCAL.
-
--- 21. How many programmers don’t know PASCAL and C.
+SELECT COUNT(*) AS total_programmers FROM PROGRAMMER
+WHERE PROF1 IN ('COBOL', 'PASCAL')
+   OR PROF2 IN ('COBOL', 'PASCAL');
+   
+   -- 21. How many programmers don’t know PASCAL and C.
+SELECT COUNT(*) FROM PROGRAMMER
+WHERE PROF1 NOT IN ('PASCAL','C')
+  AND PROF2 NOT IN ('PASCAL','C');
 
 -- 22. How old is the oldest male programmer.
+SELECT MAX(TIMESTAMPDIFF(YEAR, DOB, CURDATE())) AS OLDEST_MALE
+FROM PROGRAMMER
+WHERE SEX = 'M';
 
 -- 23. Calculate the experience in years for each programmer and display along with names in descending order.
+SELECT PNAME, TIMESTAMPDIFF(YEAR, DOJ, CURDATE()) AS EXPERIENCE
+FROM PROGRAMMER
+ORDER BY EXPERIENCE DESC;
 
 -- 24. Who are the programmers who celebrate their birthdays during the current month.
+SELECT *
+FROM PROGRAMMER
+WHERE MONTH(DOB) = MONTH(CURDATE());
 
 -- 25. How many female programmers are there.
+SELECT COUNT(*)
+FROM PROGRAMMER
+WHERE SEX = 'F';
 
 -- 26. What are the languages known by male programmers.
 
