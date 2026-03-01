@@ -28,8 +28,6 @@ A structured MySQL repository covering beginner to advanced SQL concepts with or
 
 MySQL/
 │
-├── .vscode/
-│
 ├── 00_MySQL_Handbook.pdf
 │
 ├── 01_DatabaseBasics.sql
@@ -50,9 +48,11 @@ MySQL/
 ├── 16_Indexes.sql
 ├── 17_Subqueries.sql
 ├── 18_GroupBy_And_Having.sql
+├── 19_Stored_Procedure.sql
+├── 20_Database_Trigger.sql
 │
-├── SQL_Assignment.sql
-├── SQL_Assignments_With_Answer.pdf
+├── 21_SQL_Assignment.sql
+├── 22_SQL_Assignments_With_Answer.pdf
 │
 └── README.md
 
